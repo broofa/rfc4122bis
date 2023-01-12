@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-12-15T01:45:06.393142+00:00",
+  "timestamp": "2023-01-12T01:41:42.087544+00:00",
   "repo": "ietf-wg-uuidrev/rfc4122bis",
   "labels": [
     {
@@ -562,9 +562,17 @@
       "labels": [],
       "body": "As per Brendan Moran, notes on this will be delivered on the emailer to add to security considerations.",
       "createdAt": "2022-11-08T18:41:21Z",
-      "updatedAt": "2022-11-08T18:41:21Z",
+      "updatedAt": "2023-01-10T17:35:40Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "kyzer-davis",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Possibly add reference that points too:\r\nhttps://github.com/peteroupc/peteroupc.github.io/blob/master/random.md",
+          "createdAt": "2023-01-10T17:35:40Z",
+          "updatedAt": "2023-01-10T17:35:40Z"
+        }
+      ]
     },
     {
       "number": 27,
