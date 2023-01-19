@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-01-15T01:44:25.488550+00:00",
+  "timestamp": "2023-01-19T01:43:10.462027+00:00",
   "repo": "ietf-wg-uuidrev/rfc4122bis",
   "labels": [
     {
@@ -853,7 +853,7 @@
       "labels": [],
       "body": "@kyzer-davis here's my attempt to address #23.  Some of the text I was able to just move over from what you had there but some fields didn't have a corresponding place in the new template so I just filled it out based on what made sense to me.",
       "createdAt": "2022-12-13T00:35:10Z",
-      "updatedAt": "2022-12-13T00:54:31Z",
+      "updatedAt": "2023-01-17T04:56:44Z",
       "baseRepository": "ietf-wg-uuidrev/rfc4122bis",
       "baseRefName": "main",
       "baseRefOid": "61e9ef93bce62ecce9484432f93d36a8e4b35c16",
@@ -865,7 +865,46 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOH6Ln3M5KjtWE",
+          "commit": {
+            "abbreviatedOid": "9ed7185"
+          },
+          "author": "jimfenton",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "Corrections to ABNF (should be consistent with Section 4)",
+          "createdAt": "2023-01-17T04:53:58Z",
+          "updatedAt": "2023-01-17T04:56:44Z",
+          "comments": [
+            {
+              "originalPosition": 61,
+              "body": "```suggestion\r\nnode                   = 6*hexOctet\r\n```",
+              "createdAt": "2023-01-17T04:53:58Z",
+              "updatedAt": "2023-01-17T04:56:44Z"
+            },
+            {
+              "originalPosition": 58,
+              "body": "```suggestion\r\ntime-high-and-version  = 2*hexOctet\r\n```",
+              "createdAt": "2023-01-17T04:54:15Z",
+              "updatedAt": "2023-01-17T04:56:44Z"
+            },
+            {
+              "originalPosition": 57,
+              "body": "```suggestion\r\ntime-mid               = 2*hexOctet\r\n```",
+              "createdAt": "2023-01-17T04:54:40Z",
+              "updatedAt": "2023-01-17T04:56:45Z"
+            },
+            {
+              "originalPosition": 56,
+              "body": "```suggestion\r\ntime-low               = 4*hexOctet\r\n```",
+              "createdAt": "2023-01-17T04:54:52Z",
+              "updatedAt": "2023-01-17T04:56:45Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "number": 36,
@@ -886,6 +925,32 @@
       "headRepository": "crutchcorn/rfc4122bis",
       "headRefName": "patch-1",
       "headRefOid": "067ba42f6202373e7cbbccdf4e02a5a7d84a81c0",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 37,
+      "id": "PR_kwDOH6Ln3M5IFVxn",
+      "title": "Document suggestions, hopefully non-controversial",
+      "url": "https://github.com/ietf-wg-uuidrev/rfc4122bis/pull/37",
+      "state": "OPEN",
+      "author": "jimfenton",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "This is a collection of small edits that it was easier to send as a pull request rather than as a text (e.g., email) submission. Most are grammatical corrections. I'm happy to discuss any that the editors or the wg might not agree with.",
+      "createdAt": "2023-01-19T01:25:26Z",
+      "updatedAt": "2023-01-19T01:27:40Z",
+      "baseRepository": "ietf-wg-uuidrev/rfc4122bis",
+      "baseRefName": "main",
+      "baseRefOid": "61e9ef93bce62ecce9484432f93d36a8e4b35c16",
+      "headRepository": "ietf-wg-uuidrev/rfc4122bis",
+      "headRefName": "fenton-edits",
+      "headRefOid": "d590d89e8d16f62028db4f0bd1cb4ef4bf94ee7a",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
