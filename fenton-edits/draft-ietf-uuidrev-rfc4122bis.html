@@ -11,8 +11,8 @@
 <meta content="Kyzer R. Davis" name="author">
 <meta content="
        This specification defines a Uniform Resource Name namespace for
-UUIDs (Universally Unique IDentifier), also known as GUIDs (Globally
-Unique IDentifier).  A UUID is 128 bits long, and can guarantee
+UUIDs (Universally Unique IDentifiers), also known as GUIDs (Globally
+Unique IDentifiers).  A UUID is 128 bits long, and can guarantee
 uniqueness across space and time.  UUIDs were originally used in the
 Apollo Network Computing System and later in the Open Software
 Foundation's (OSF) Distributed Computing Environment (DCE), and then
@@ -22,26 +22,26 @@ kind permission of the OSF (now known as The Open Group).
 Information from earlier versions of the DCE specification have been
 incorporated into this document. 
     " name="description">
-<meta content="xml2rfc 3.15.2" name="generator">
+<meta content="xml2rfc 3.15.3" name="generator">
 <meta content="uuid" name="keyword">
 <meta content="draft-ietf-uuidrev-rfc4122bis-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.15.2
-    Python 3.10.5
+  xml2rfc 3.15.3
+    Python 3.10.9
     appdirs 1.4.4
     ConfigArgParse 1.5.3
     google-i18n-address 2.5.2
     html5lib 1.1
     intervaltree 3.1.0
     Jinja2 3.1.2
-    lxml 4.9.1
+    lxml 4.9.2
     MarkupSafe 2.1.1
     pycountry 22.3.5
     PyYAML 6.0
-    requests 2.27.1
-    setuptools 59.4.0
+    requests 2.28.1
+    setuptools 65.6.0
     six 1.16.0
-    wcwidth 0.2.5
+    wcwidth 0.2.6
 -->
 <link href="draft-ietf-uuidrev-rfc4122bis.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -385,7 +385,7 @@ dl {
 dl > dt {
   float: left;
   margin-right: 1em;
-  min-width: 12ch;
+  min-width: 8ch;
 }
 dl.dlNewline > dt {
   float: none;
@@ -408,7 +408,7 @@ dl > dd > dl {
   margin-top: 0.5em;
   margin-bottom: 0;
 }
-dl .break {
+:is(dd, span).break {
   display: none;
 }
 
@@ -428,7 +428,7 @@ a[href]:hover {
 a[href].selfRef:hover {
   background-color: var(--highlight-color);
 }
-a.xref {
+a.xref:is(.cite, .auto), :is(#status-of-memo, #copyright) a {
   white-space: nowrap;
 }
 
@@ -440,7 +440,9 @@ tt, code, pre {
 tt, code {
   /* changing the font for inline elements leads to different ascender
      and descender heights; as we want to retain baseline alignment,
-     remove leading to avoid altering the final height of lines */
+     remove leading to avoid altering the final height of lines
+     note: this fails if these blocks take an entire line,
+     a different solution would be great */
   line-height: 0;
 }
 :is(h1, h2, h3, h4, h5, h6) :is(tt, code) {
@@ -1037,7 +1039,7 @@ svg :is([stroke="white"], [stroke^="#fff"]) {
 svg :is([fill="black"], [fill^="#000"], :not([fill])) {
   fill: var(--text-color);
 }
-svg :is([stroke="fill"], [fill^="#fff"]) {
+svg :is([fill="white"], [fill^="#fff"]) {
   fill: var(--background-color);
 }
 </style>
@@ -1048,11 +1050,11 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">A UUID URN Namespace</td>
-<td class="right">November 2022</td>
+<td class="right">January 2023</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Leach, et al.</td>
-<td class="center">Expires 18 May 2023</td>
+<td class="center">Expires 23 July 2023</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1068,12 +1070,12 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
 <a href="https://www.rfc-editor.org/rfc/rfc4122" class="eref">4122</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2022-11-14" class="published">14 November 2022</time>
+<time datetime="2023-01-19" class="published">19 January 2023</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2023-05-18">18 May 2023</time></dd>
+<dd class="expires"><time datetime="2023-07-23">23 July 2023</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1098,8 +1100,8 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">This specification defines a Uniform Resource Name namespace for
-UUIDs (Universally Unique IDentifier), also known as GUIDs (Globally
-Unique IDentifier).  A UUID is 128 bits long, and can guarantee
+UUIDs (Universally Unique IDentifiers), also known as GUIDs (Globally
+Unique IDentifiers).  A UUID is 128 bits long, and can guarantee
 uniqueness across space and time.  UUIDs were originally used in the
 Apollo Network Computing System and later in the Open Software
 Foundation's (OSF) Distributed Computing Environment (DCE), and then
@@ -1139,7 +1141,7 @@ incorporated into this document.<a href="#section-abstract-2" class="pilcrow">¶
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 18 May 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 23 July 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1148,7 +1150,7 @@ incorporated into this document.<a href="#section-abstract-2" class="pilcrow">¶
 <a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
         </h2>
 <p id="section-boilerplate.2-1">
-            Copyright (c) 2022 IETF Trust and the persons identified as the
+            Copyright (c) 2023 IETF Trust and the persons identified as the
             document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.2-2">
             This document is subject to BCP 78 and the IETF Trust's Legal
@@ -1173,12 +1175,17 @@ incorporated into this document.<a href="#section-abstract-2" class="pilcrow">¶
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
             <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-motivation" class="internal xref">Motivation</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1">
+                <p id="section-toc.1-1.2.2.1.1" class="keepWithNext"><a href="#section-2.1" class="auto internal xref">2.1</a>.  <a href="#name-update-motivation" class="internal xref">Update motivation</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
             <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-terminology" class="internal xref">Terminology</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
-                <p id="section-toc.1-1.3.2.1.1" class="keepWithNext"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-requirements-language" class="internal xref">Requirements Language</a></p>
+                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-requirements-language" class="internal xref">Requirements Language</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
                 <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-abbreviations" class="internal xref">Abbreviations</a></p>
@@ -1238,7 +1245,7 @@ incorporated into this document.<a href="#section-abstract-2" class="pilcrow">¶
             <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-uuid-best-practices" class="internal xref">UUID Best Practices</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
-                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-timestamp-granularity" class="internal xref">Timestamp Granularity</a></p>
+                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-timestamp-considerations" class="internal xref">Timestamp Considerations</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2">
                 <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-monotonicity-and-counters" class="internal xref">Monotonicity and Counters</a></p>
@@ -1360,13 +1367,13 @@ incorporated into this document.<a href="#section-abstract-2" class="pilcrow">¶
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
 <p id="section-1-1">This specification defines a Uniform Resource Name namespace for
-UUIDs (Universally Unique IDentifier), also known as GUIDs (Globally
-Unique IDentifier).  A UUID is 128 bits long, and requires no central
+UUIDs (Universally Unique IDentifiers), also known as GUIDs (Globally
+Unique IDentifiers).  A UUID is 128 bits long, and requires no central
 registration process.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">The information here is meant to be a concise guide for those wishing
 to implement services using UUIDs as URNs <span>[<a href="#RFC8141" class="cite xref">RFC8141</a>]</span>.  Nothing in this document
 should be construed to override the DCE standards that defined UUIDs.<a href="#section-1-2" class="pilcrow">¶</a></p>
-<p id="section-1-3">There is an ITU-T Recommendation and ISO/IEC Standard <span>[<a href="#X667" class="cite xref">X667</a>]</span> that are
+<p id="section-1-3">There is an ITU-T Recommendation and an ISO/IEC Standard <span>[<a href="#X667" class="cite xref">X667</a>]</span> that are
 derived from earlier versions of this document.  Both sets of
 specifications have been aligned, and are fully technically
 compatible.  In addition, a global registration function is being
@@ -1386,7 +1393,7 @@ on demand can be completely automated, and used for a variety of
 purposes.  The UUID generation algorithm described here supports very
 high allocation rates of up to 10 million per second per machine if
 necessary, so that they could even be used as transaction IDs.<a href="#section-2-1" class="pilcrow">¶</a></p>
-<p id="section-2-2">UUIDs are of a fixed size (128 bits) which is reasonably small
+<p id="section-2-2">UUIDs are of a fixed size (128 bits), which is reasonably small
 compared to other alternatives.  This lends itself well to sorting,
 ordering, and hashing of all sorts, storing in databases, simple
 allocation, and ease of programming in general.<a href="#section-2-2" class="pilcrow">¶</a></p>
@@ -1394,114 +1401,121 @@ allocation, and ease of programming in general.<a href="#section-2-2" class="pil
 Resource Names.  The unique ability to generate a new UUID without a
 registration process allows for UUIDs to be one of the URNs with the
 lowest minting cost.<a href="#section-2-3" class="pilcrow">¶</a></p>
-<p id="section-2-4">Furthermore, many things have changed in the time since UUIDs were originally created.
+<div id="update-motivation">
+<section id="section-2.1">
+        <h3 id="name-update-motivation">
+<a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-update-motivation" class="section-name selfRef">Update motivation</a>
+        </h3>
+<p id="section-2.1-1">Many things have changed in the time since UUIDs were originally created.
 Modern applications have a need to create and utilize UUIDs as the primary
 identifier for a variety of different items in complex computational systems,
 including but not limited to database keys, file names, machine or system
-names, and identifiers for event-driven transactions.<a href="#section-2-4" class="pilcrow">¶</a></p>
-<p id="section-2-5">One area UUIDs have gained popularity is as database keys.
+names, and identifiers for event-driven transactions.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
+<p id="section-2.1-2">One area in which UUIDs have gained popularity is as database keys.
 This stems from the increasingly distributed nature of modern applications.
 In such cases, "auto increment" schemes often used by databases do not work
-well, as the effort required to coordinate unique numeric identifiers across
+well, as the effort required to coordinate sequential numeric identifiers across
 a network can easily become a burden.
 The fact that UUIDs can be used to create unique, reasonably short values
-in distributed systems without requiring synchronization makes them a good
-alternative, but UUID versions 1-5 lack certain other desirable characteristics:<a href="#section-2-5" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-2-6">
-<li id="section-2-6.1">Non-time-ordered UUID versions such as UUIDv4 have poor database index
+in distributed systems without requiring coordination makes them a good
+alternative, but UUID versions 1-5 lack certain other desirable characteristics:<a href="#section-2.1-2" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-2.1-3">
+<li id="section-2.1-3.1">Non-time-ordered UUID versions such as UUIDv4 have poor database index
   locality.
-  Meaning new values created in succession are not close to each other in
+  This means that new values created in succession are not close to each other in
   the index and thus require inserts to be performed at random
   locations.
   The negative performance effects of which on common structures used for
-  this (B-tree and its variants) can be dramatic.<a href="#section-2-6.1" class="pilcrow">¶</a>
+  this (B-tree and its variants) can be dramatic.<a href="#section-2.1-3.1" class="pilcrow">¶</a>
 </li>
-        <li id="section-2-6.2">The 100-nanosecond, Gregorian epoch used in UUIDv1 timestamps is uncommon
+          <li id="section-2.1-3.2">The 100-nanosecond Gregorian epoch used in UUIDv1 timestamps is uncommon
   and difficult to represent accurately using a standard number format such
-  as <span>[<a href="#IEEE754" class="cite xref">IEEE754</a>]</span>.<a href="#section-2-6.2" class="pilcrow">¶</a>
+  as <span>[<a href="#IEEE754" class="cite xref">IEEE754</a>]</span>.<a href="#section-2.1-3.2" class="pilcrow">¶</a>
 </li>
-        <li id="section-2-6.3">Introspection/parsing is required to order by time sequence; as opposed to
-  being able to perform a simple byte-by-byte comparison.<a href="#section-2-6.3" class="pilcrow">¶</a>
+          <li id="section-2.1-3.3">Introspection/parsing is required to order by time sequence, as opposed to
+  being able to perform a simple byte-by-byte comparison.<a href="#section-2.1-3.3" class="pilcrow">¶</a>
 </li>
-        <li id="section-2-6.4">Privacy and network security issues arise from using a MAC address in the
+          <li id="section-2.1-3.4">Privacy and network security issues arise from using a MAC address in the
   node field of Version 1 UUIDs.
   Exposed MAC addresses can be used as an attack surface to locate machines
   and reveal various other
   information about such machines (minimally manufacturer, potentially other
   details). Additionally, with the advent of virtual machines and containers,
-  MAC address uniqueness is no longer guaranteed.<a href="#section-2-6.4" class="pilcrow">¶</a>
+  MAC address uniqueness is no longer guaranteed.<a href="#section-2.1-3.4" class="pilcrow">¶</a>
 </li>
-        <li id="section-2-6.5">Many of the implementation details specified in RFC4122 involved trade
+          <li id="section-2.1-3.5">Many of the implementation details specified in RFC4122 involved trade
   offs that are neither possible to specify for all applications nor
-  necessary to produce interoperable implementations.<a href="#section-2-6.5" class="pilcrow">¶</a>
+  necessary to produce interoperable implementations.<a href="#section-2.1-3.5" class="pilcrow">¶</a>
 </li>
-        <li id="section-2-6.6">RFC4122 did not distinguish between the requirements for generation
+          <li id="section-2.1-3.6">RFC4122 did not distinguish between the requirements for generation
   of a UUID versus an application which simply stores one, which are often
-  different.<a href="#section-2-6.6" class="pilcrow">¶</a>
+  different.<a href="#section-2.1-3.6" class="pilcrow">¶</a>
 </li>
-      </ol>
-<p id="section-2-7">Due to the aforementioned issue, many widely distributed database applications
+        </ol>
+<p id="section-2.1-4">Due to the aforementioned issues, many widely distributed database applications
 and large application vendors have sought to solve the problem of creating
 a better
 time-based, sortable unique identifier for use as a database key. This has
 lead to numerous implementations
-over the past 10+ years solving the same problem in slightly different ways.<a href="#section-2-7" class="pilcrow">¶</a></p>
-<p id="section-2-8">While preparing this specification the following 16 different implementations
+over the past 10+ years solving the same problem in slightly different ways.<a href="#section-2.1-4" class="pilcrow">¶</a></p>
+<p id="section-2.1-5">While preparing this specification the following 16 different implementations
 were analyzed for trends in total ID length, bit Layout, lexical formatting/encoding,
 timestamp type, timestamp format, timestamp accuracy, node format/components,
-collision handling and multi-timestamp tick generation sequencing.<a href="#section-2-8" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="compact type-1" id="section-2-9">
-<li id="section-2-9.1">
-          <span>[<a href="#ULID" class="cite xref">ULID</a>]</span> by A. Feerasta<a href="#section-2-9.1" class="pilcrow">¶</a>
+collision handling and multi-timestamp tick generation sequencing.<a href="#section-2.1-5" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="compact type-1" id="section-2.1-6">
+<li id="section-2.1-6.1">
+            <span>[<a href="#ULID" class="cite xref">ULID</a>]</span> by A. Feerasta<a href="#section-2.1-6.1" class="pilcrow">¶</a>
 </li>
-        <li id="section-2-9.2">
-          <span>[<a href="#LexicalUUID" class="cite xref">LexicalUUID</a>]</span> by Twitter<a href="#section-2-9.2" class="pilcrow">¶</a>
+          <li id="section-2.1-6.2">
+            <span>[<a href="#LexicalUUID" class="cite xref">LexicalUUID</a>]</span> by Twitter<a href="#section-2.1-6.2" class="pilcrow">¶</a>
 </li>
-        <li id="section-2-9.3">
-          <span>[<a href="#Snowflake" class="cite xref">Snowflake</a>]</span> by Twitter<a href="#section-2-9.3" class="pilcrow">¶</a>
+          <li id="section-2.1-6.3">
+            <span>[<a href="#Snowflake" class="cite xref">Snowflake</a>]</span> by Twitter<a href="#section-2.1-6.3" class="pilcrow">¶</a>
 </li>
-        <li id="section-2-9.4">
-          <span>[<a href="#Flake" class="cite xref">Flake</a>]</span> by Boundary<a href="#section-2-9.4" class="pilcrow">¶</a>
+          <li id="section-2.1-6.4">
+            <span>[<a href="#Flake" class="cite xref">Flake</a>]</span> by Boundary<a href="#section-2.1-6.4" class="pilcrow">¶</a>
 </li>
-        <li id="section-2-9.5">
-          <span>[<a href="#ShardingID" class="cite xref">ShardingID</a>]</span> by Instagram<a href="#section-2-9.5" class="pilcrow">¶</a>
+          <li id="section-2.1-6.5">
+            <span>[<a href="#ShardingID" class="cite xref">ShardingID</a>]</span> by Instagram<a href="#section-2.1-6.5" class="pilcrow">¶</a>
 </li>
-        <li id="section-2-9.6">
-          <span>[<a href="#KSUID" class="cite xref">KSUID</a>]</span> by Segment<a href="#section-2-9.6" class="pilcrow">¶</a>
+          <li id="section-2.1-6.6">
+            <span>[<a href="#KSUID" class="cite xref">KSUID</a>]</span> by Segment<a href="#section-2.1-6.6" class="pilcrow">¶</a>
 </li>
-        <li id="section-2-9.7">
-          <span>[<a href="#Elasticflake" class="cite xref">Elasticflake</a>]</span> by P. Pearcy<a href="#section-2-9.7" class="pilcrow">¶</a>
+          <li id="section-2.1-6.7">
+            <span>[<a href="#Elasticflake" class="cite xref">Elasticflake</a>]</span> by P. Pearcy<a href="#section-2.1-6.7" class="pilcrow">¶</a>
 </li>
-        <li id="section-2-9.8">
-          <span>[<a href="#FlakeID" class="cite xref">FlakeID</a>]</span> by T. Pawlak<a href="#section-2-9.8" class="pilcrow">¶</a>
+          <li id="section-2.1-6.8">
+            <span>[<a href="#FlakeID" class="cite xref">FlakeID</a>]</span> by T. Pawlak<a href="#section-2.1-6.8" class="pilcrow">¶</a>
 </li>
-        <li id="section-2-9.9">
-          <span>[<a href="#Sonyflake" class="cite xref">Sonyflake</a>]</span> by Sony<a href="#section-2-9.9" class="pilcrow">¶</a>
+          <li id="section-2.1-6.9">
+            <span>[<a href="#Sonyflake" class="cite xref">Sonyflake</a>]</span> by Sony<a href="#section-2.1-6.9" class="pilcrow">¶</a>
 </li>
-        <li id="section-2-9.10">
-          <span>[<a href="#orderedUuid" class="cite xref">orderedUuid</a>]</span> by IT. Cabrera<a href="#section-2-9.10" class="pilcrow">¶</a>
+          <li id="section-2.1-6.10">
+            <span>[<a href="#orderedUuid" class="cite xref">orderedUuid</a>]</span> by IT. Cabrera<a href="#section-2.1-6.10" class="pilcrow">¶</a>
 </li>
-        <li id="section-2-9.11">
-          <span>[<a href="#COMBGUID" class="cite xref">COMBGUID</a>]</span> by R. Tallent<a href="#section-2-9.11" class="pilcrow">¶</a>
+          <li id="section-2.1-6.11">
+            <span>[<a href="#COMBGUID" class="cite xref">COMBGUID</a>]</span> by R. Tallent<a href="#section-2.1-6.11" class="pilcrow">¶</a>
 </li>
-        <li id="section-2-9.12">
-          <span>[<a href="#SID" class="cite xref">SID</a>]</span> by A. Chilton<a href="#section-2-9.12" class="pilcrow">¶</a>
+          <li id="section-2.1-6.12">
+            <span>[<a href="#SID" class="cite xref">SID</a>]</span> by A. Chilton<a href="#section-2.1-6.12" class="pilcrow">¶</a>
 </li>
-        <li id="section-2-9.13">
-          <span>[<a href="#pushID" class="cite xref">pushID</a>]</span> by Google<a href="#section-2-9.13" class="pilcrow">¶</a>
+          <li id="section-2.1-6.13">
+            <span>[<a href="#pushID" class="cite xref">pushID</a>]</span> by Google<a href="#section-2.1-6.13" class="pilcrow">¶</a>
 </li>
-        <li id="section-2-9.14">
-          <span>[<a href="#XID" class="cite xref">XID</a>]</span> by O. Poitrey<a href="#section-2-9.14" class="pilcrow">¶</a>
+          <li id="section-2.1-6.14">
+            <span>[<a href="#XID" class="cite xref">XID</a>]</span> by O. Poitrey<a href="#section-2.1-6.14" class="pilcrow">¶</a>
 </li>
-        <li id="section-2-9.15">
-          <span>[<a href="#ObjectID" class="cite xref">ObjectID</a>]</span> by MongoDB<a href="#section-2-9.15" class="pilcrow">¶</a>
+          <li id="section-2.1-6.15">
+            <span>[<a href="#ObjectID" class="cite xref">ObjectID</a>]</span> by MongoDB<a href="#section-2.1-6.15" class="pilcrow">¶</a>
 </li>
-        <li id="section-2-9.16">
-          <span>[<a href="#CUID" class="cite xref">CUID</a>]</span> by E. Elliott<a href="#section-2-9.16" class="pilcrow">¶</a>
+          <li id="section-2.1-6.16">
+            <span>[<a href="#CUID" class="cite xref">CUID</a>]</span> by E. Elliott<a href="#section-2.1-6.16" class="pilcrow">¶</a>
 </li>
-      </ol>
-<p id="section-2-10">An inspection of these implementations and the issues described above has
-led to this document which attempts to adapt UUIDs to address these issues.<a href="#section-2-10" class="pilcrow">¶</a></p>
+        </ol>
+<p id="section-2.1-7">An inspection of these implementations and the issues described above has
+led to this document which attempts to adapt UUIDs to address these issues.<a href="#section-2.1-7" class="pilcrow">¶</a></p>
+</section>
+</div>
 </section>
 </div>
 <div id="terminology">
@@ -1604,7 +1618,7 @@ appear in all capitals, as shown here.<a href="#section-3.1-1" class="pilcrow">�
 </li>
           <li class="compact" id="section-3.3-3.3">Change: Reference RFC2141 to RFC8141<a href="#section-3.3-3.3" class="pilcrow">¶</a>
 </li>
-          <li class="compact" id="section-3.3-3.4">Change: Reference RFC2234 to RFC5234<a href="#section-3.3-3.4" class="pilcrow">¶</a>
+          <li class="compact" id="section-3.3-3.4">Change: Reference RFC2234 to RFC4234<a href="#section-3.3-3.4" class="pilcrow">¶</a>
 </li>
           <li class="compact" id="section-3.3-3.5">Change: Reference FIPS 180-1 to FIPS 180-4 for SHA1<a href="#section-3.3-3.5" class="pilcrow">¶</a>
 </li>
@@ -1667,18 +1681,18 @@ appear in all capitals, as shown here.<a href="#section-3.1-1" class="pilcrow">�
 <p id="section-4-1">The UUID format is 16 octets (128 bits); the variant bits in conjunction with the version
 bits described in the next sections in determine finer structure.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <p id="section-4-2">UUIDs <span class="bcp14">MAY</span> be represented as binary data or integers.
-When in use with URNs or applications, any given 128 bit UUID <span class="bcp14">SHOULD</span>
+When in use with URNs or applications, any given UUID <span class="bcp14">SHOULD</span>
 be represented by the "hex-and-dash" string format consisting of multiple
-groups of upper or lowercase alphanumeric hex characters separated by a single dash/hyphen.
+groups of upper or lowercase alphanumeric hex characters separated by single dashes/hyphens.
 When used with databases please refer to <a href="#database_considerations" class="auto internal xref">Section 6.12</a>.<a href="#section-4-2" class="pilcrow">¶</a></p>
-<p id="section-4-3">The formal definition of the UUID string representation is provided by the following (ABNF) <span>[<a href="#RFC5234" class="cite xref">RFC5234</a>]</span>.<a href="#section-4-3" class="pilcrow">¶</a></p>
-<div id="section-4-4">
-<pre class="lang-abnf sourcecode">
-   UUID                   = 4*hexOctet "-"
-                            2*hexOctet "-"
-                            2*hexOctet "-"
-                            2*hexOctet "-"
-                            6*hexOctet
+<p id="section-4-3">The formal definition of the UUID string representation is provided by the following ABNF <span>[<a href="#RFC4234" class="cite xref">RFC4234</a>]</span>.<a href="#section-4-3" class="pilcrow">¶</a></p>
+<div class="lang-abnf sourcecode" id="section-4-4">
+<pre>
+   UUID                   = 4hexOctet "-"
+                            2hexOctet "-"
+                            2hexOctet "-"
+                            2hexOctet "-"
+                            6hexOctet
    hexOctet               = hexDigit hexDigit
    hexDigit =
          "0" / "1" / "2" / "3" / "4" / "5" / "6" / "7" / "8" / "9" /
@@ -1686,9 +1700,9 @@ When used with databases please refer to <a href="#database_considerations" clas
          "A" / "B" / "C" / "D" / "E" / "F"
 </pre><a href="#section-4-4" class="pilcrow">¶</a>
 </div>
-<p id="section-4-5">An example UUID using this textual representation from the previous table observed in <a href="#sampleHexUUID" class="auto internal xref">Figure 1</a>.
-Note that in this example the alphabetic characters may be all uppercase, all lowercase or mixed case as per <span>[<a href="#RFC5234" class="cite xref">RFC5234</a>], <a href="https://rfc-editor.org/rfc/rfc5234#section-2.3" class="relref">Section 2.3</a></span><a href="#section-4-5" class="pilcrow">¶</a></p>
-<span id="name-example-hex-uuid"></span><div id="sampleHexUUID">
+<p id="section-4-5">An example UUID using this textual representation from the previous table observed in <a href="#sampleStringUUID" class="auto internal xref">Figure 1</a>.
+Note that in this example the alphabetic characters may be all uppercase, all lowercase or mixed case as per <span>[<a href="#RFC4234" class="cite xref">RFC4234</a>], <a href="https://rfc-editor.org/rfc/rfc4234#section-2.3" class="relref">Section 2.3</a></span><a href="#section-4-5" class="pilcrow">¶</a></p>
+<span id="name-example-string-uuid-format"></span><div id="sampleStringUUID">
 <figure id="figure-1">
         <div class="alignLeft art-text artwork" id="section-4-6.1">
 <pre>
@@ -1696,11 +1710,11 @@ f81d4fae-7dec-11d0-a765-00a0c91e6bf6
 </pre>
 </div>
 <figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
-<a href="#name-example-hex-uuid" class="selfRef">Example Hex UUID</a>
+<a href="#name-example-string-uuid-format" class="selfRef">Example String UUID format</a>
         </figcaption></figure>
 </div>
-<p id="section-4-7">The same UUID from <a href="#sampleHexUUID" class="auto internal xref">Figure 1</a> is represented in Binary <a href="#sampleBinaryUUID" class="auto internal xref">Figure 2</a>, Integer <a href="#sampleIntegerUUID" class="auto internal xref">Figure 3</a> and as a URN <a href="#sampleURNUUID" class="auto internal xref">Figure 4</a> defined by <span>[<a href="#RFC8141" class="cite xref">RFC8141</a>]</span>.<a href="#section-4-7" class="pilcrow">¶</a></p>
-<span id="name-example-binary-uuid"></span><div id="sampleBinaryUUID">
+<p id="section-4-7">The same UUID from <a href="#sampleStringUUID" class="auto internal xref">Figure 1</a> is represented in Binary <a href="#sampleBinaryUUID" class="auto internal xref">Figure 2</a>, Integer <a href="#sampleIntegerUUID" class="auto internal xref">Figure 3</a> and as a URN <a href="#sampleURNUUID" class="auto internal xref">Figure 4</a> defined by <span>[<a href="#RFC8141" class="cite xref">RFC8141</a>]</span>.<a href="#section-4-7" class="pilcrow">¶</a></p>
+<span id="name-example-hex-uuid"></span><div id="sampleBinaryUUID">
 <figure id="figure-2">
         <div class="alignLeft art-text artwork" id="section-4-8.1">
 <pre>
@@ -1708,10 +1722,10 @@ f81d4fae-7dec-11d0-a765-00a0c91e6bf6
 </pre>
 </div>
 <figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
-<a href="#name-example-binary-uuid" class="selfRef">Example Binary UUID</a>
+<a href="#name-example-hex-uuid" class="selfRef">Example Hex UUID</a>
         </figcaption></figure>
 </div>
-<span id="name-example-integer-uuid"></span><div id="sampleIntegerUUID">
+<span id="name-example-hex-uuid-2"></span><div id="sampleIntegerUUID">
 <figure id="figure-3">
         <div class="alignLeft art-text artwork" id="section-4-9.1">
 <pre>
@@ -1719,10 +1733,10 @@ f81d4fae-7dec-11d0-a765-00a0c91e6bf6
 </pre>
 </div>
 <figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
-<a href="#name-example-integer-uuid" class="selfRef">Example Integer UUID</a>
+<a href="#name-example-hex-uuid-2" class="selfRef">Example Hex UUID</a>
         </figcaption></figure>
 </div>
-<span id="name-example-urn-uuid"></span><div id="sampleURNUUID">
+<span id="name-example-hex-uuid-3"></span><div id="sampleURNUUID">
 <figure id="figure-4">
         <div class="alignLeft art-text artwork" id="section-4-10.1">
 <pre>
@@ -1730,7 +1744,7 @@ urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6
 </pre>
 </div>
 <figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
-<a href="#name-example-urn-uuid" class="selfRef">Example URN UUID</a>
+<a href="#name-example-hex-uuid-3" class="selfRef">Example Hex UUID</a>
         </figcaption></figure>
 </div>
 <div id="variant_field">
@@ -1791,8 +1805,8 @@ the letter "x" indicates a "don't-care" value.<a href="#section-4.1-2" class="pi
 <p id="section-4.1-4">Interoperability, in any form, with variants other than the one
 defined here is not guaranteed, and is not likely to be an issue in
 practice.<a href="#section-4.1-4" class="pilcrow">¶</a></p>
-<p id="section-4.1-5">Specifically for UUIDs in this document bits 64 and 65 of octet 8 <span class="bcp14">MUST</span> be set to 1 and 0 as per row 2 of <a href="#table1" class="auto internal xref">Table 1</a>.
-As such all bit and field layouts will detail a 2 bit variant entry as guidance.<a href="#section-4.1-5" class="pilcrow">¶</a></p>
+<p id="section-4.1-5">Specifically for UUIDs in this document bits 64 and 65 of the UUID (bits 0 and 1 of octet 8) <span class="bcp14">MUST</span> be set to 1 and 0 as specified in row 2 of <a href="#table1" class="auto internal xref">Table 1</a>.
+Accordingly, all bit and field layouts avoid the use of these bits.<a href="#section-4.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="version_field">
@@ -1800,14 +1814,14 @@ As such all bit and field layouts will detail a 2 bit variant entry as guidance.
         <h3 id="name-version-field">
 <a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-version-field" class="section-name selfRef">Version Field</a>
         </h3>
-<p id="section-4.2-1">The version number is in the most significant 4 bits of octet 6.
-More specifically bits 48 through 51. The remaining 4 bits of Octet 6 are dynamic.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
+<p id="section-4.2-1">The version number is in the most significant 4 bits of octet 6
+(bits 48 through 51 of the UUID).<a href="#section-4.2-1" class="pilcrow">¶</a></p>
 <p id="section-4.2-2"><a href="#table2" class="auto internal xref">Table 2</a> lists all of the versions for this UUID variant specified in this document.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
-<span id="name-uuid-variant-10xx-8-9-a-b-v"></span><div id="table2">
+<span id="name-uuid-variant-10x-versions-d"></span><div id="table2">
 <table class="center" id="table-2">
           <caption>
 <a href="#table-2" class="selfRef">Table 2</a>:
-<a href="#name-uuid-variant-10xx-8-9-a-b-v" class="selfRef">UUID variant 10xx (8/9/A/B) versions defined by this specification</a>
+<a href="#name-uuid-variant-10x-versions-d" class="selfRef">UUID variant 10x versions defined by this specification</a>
           </caption>
 <thead>
             <tr>
@@ -1834,7 +1848,7 @@ More specifically bits 48 through 51. The remaining 4 bits of Octet 6 are dynami
               <td class="text-left" rowspan="1" colspan="1">0</td>
               <td class="text-left" rowspan="1" colspan="1">1</td>
               <td class="text-left" rowspan="1" colspan="1">1</td>
-              <td class="text-left" rowspan="1" colspan="1">The Gregorian time-based UUID from in this document.</td>
+              <td class="text-left" rowspan="1" colspan="1">The Gregorian time-based UUID specified in this document.</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">0</td>
@@ -1996,10 +2010,10 @@ practice.<a href="#section-5-3" class="pilcrow">¶</a></p>
 represented by Coordinated Universal Time (UTC) as a count of 100-
 nanosecond intervals since 00:00:00.00, 15 October 1582 (the date of
 Gregorian reform to the Christian calendar).<a href="#section-5.1-1" class="pilcrow">¶</a></p>
-<p id="section-5.1-2">UUID Version 1 also features clock sequence field which is used to help avoid
+<p id="section-5.1-2">UUID Version 1 also features a clock sequence field which is used to help avoid
 duplicates that could arise when the clock is set backwards in time
 or if the node ID changes.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
-<p id="section-5.1-3">Finally the node field consists of an IEEE 802 MAC
+<p id="section-5.1-3">The node field consists of an IEEE 802 MAC
 address, usually the host address.  For systems with multiple IEEE
 802 addresses, any available one can be used.  The lowest addressed
 octet (octet number 10) contains the global/local bit and the
@@ -2111,7 +2125,7 @@ that are drawn from, and unique within, some "name space" as per <a href="#name_
 <p id="section-5.3-2">UUIDv3 values are created by computing an MD5 <span>[<a href="#RFC1321" class="cite xref">RFC1321</a>]</span>
 hash over a given name space value concatenated with the desired name value
 after both have been converted to a canonical sequence of octets in network byte order.
-This MD5 value is then uses to populate all 128 bits of the UUID layout.
+This MD5 value is then used to populate all 128 bits of the UUID layout.
 The UUID version and variant then replace the respective bits as defined by <a href="#version_field" class="auto internal xref">Section 4.2</a> and <a href="#variant_field" class="auto internal xref">Section 4.1</a>.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
 <p id="section-5.3-3">Some common name space values have been defined via <a href="#namespaces" class="auto internal xref">Appendix B.2</a>.<a href="#section-5.3-3" class="pilcrow">¶</a></p>
 <p id="section-5.3-4">Where possible UUIDv5 <span class="bcp14">SHOULD</span> be used in lieu of UUIDv3.
@@ -2145,7 +2159,7 @@ from the computed MD5 value.<a href="#section-5.3-6.2.1" class="pilcrow">¶</a><
           <dd class="break"></dd>
 <dt id="section-5.3-6.3">ver:</dt>
           <dd style="margin-left: 1.5em" id="section-5.3-6.4">
-            <p id="section-5.3-6.4.1">The 4 bit version field as defined by <a href="#version_field" class="auto internal xref">Section 4.2</a><a href="#section-5.3-6.4.1" class="pilcrow">¶</a></p>
+            <p id="section-5.3-6.4.1">The 4 bit version field as defined by <a href="#version_field" class="auto internal xref">Section 4.2</a> set to 0011<a href="#section-5.3-6.4.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-5.3-6.5">md5_mid:</dt>
@@ -2157,7 +2171,7 @@ from the computed MD5 value.<a href="#section-5.3-6.6.1" class="pilcrow">¶</a><
           <dd class="break"></dd>
 <dt id="section-5.3-6.7">var:</dt>
           <dd style="margin-left: 1.5em" id="section-5.3-6.8">
-            <p id="section-5.3-6.8.1">The 2 bit variant field as defined by <a href="#variant_field" class="auto internal xref">Section 4.1</a>.<a href="#section-5.3-6.8.1" class="pilcrow">¶</a></p>
+            <p id="section-5.3-6.8.1">The 2 bit variant field as defined by <a href="#variant_field" class="auto internal xref">Section 4.1</a> set to 10<a href="#section-5.3-6.8.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-5.3-6.9">md5_low:</dt>
@@ -2168,6 +2182,7 @@ from the computed MD5 value.<a href="#section-5.3-6.10.1" class="pilcrow">¶</a>
 </dd>
         <dd class="break"></dd>
 </dl>
+<p id="section-5.3-7">For more information on MD5 security considerations see <span>[<a href="#RFC6194" class="cite xref">RFC6194</a>]</span>.<a href="#section-5.3-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="uuidv4">
@@ -2208,13 +2223,12 @@ for random_a, random_b, and random_c then concatenate the version and variant in
 <span class="break"></span><dl class="dlNewline" id="section-5.4-6">
           <dt id="section-5.4-6.1">random_a:</dt>
           <dd style="margin-left: 1.5em" id="section-5.4-6.2">
-            <p id="section-5.4-6.2.1">The first 48 bits of the layout that can be filled with random data as per <a href="#unguessability" class="auto internal xref">Section 6.8</a>
-fit.<a href="#section-5.4-6.2.1" class="pilcrow">¶</a></p>
+            <p id="section-5.4-6.2.1">The first 48 bits of the layout that can be filled with random data as specified in <a href="#unguessability" class="auto internal xref">Section 6.8</a><a href="#section-5.4-6.2.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-5.4-6.3">ver:</dt>
           <dd style="margin-left: 1.5em" id="section-5.4-6.4">
-            <p id="section-5.4-6.4.1">The 4 bit version field as defined by <a href="#version_field" class="auto internal xref">Section 4.2</a><a href="#section-5.4-6.4.1" class="pilcrow">¶</a></p>
+            <p id="section-5.4-6.4.1">The 4 bit version field as defined by <a href="#version_field" class="auto internal xref">Section 4.2</a> set to 0100<a href="#section-5.4-6.4.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-5.4-6.5">random_b:</dt>
@@ -2224,7 +2238,7 @@ fit.<a href="#section-5.4-6.2.1" class="pilcrow">¶</a></p>
           <dd class="break"></dd>
 <dt id="section-5.4-6.7">var:</dt>
           <dd style="margin-left: 1.5em" id="section-5.4-6.8">
-            <p id="section-5.4-6.8.1">The 2 bit variant field as defined by <a href="#variant_field" class="auto internal xref">Section 4.1</a>.<a href="#section-5.4-6.8.1" class="pilcrow">¶</a></p>
+            <p id="section-5.4-6.8.1">The 2 bit variant field as defined by <a href="#variant_field" class="auto internal xref">Section 4.1</a> set to 10<a href="#section-5.4-6.8.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-5.4-6.9">random_c:</dt>
@@ -2246,12 +2260,11 @@ that are drawn from, and unique within, some "name space" as per <a href="#name_
 <p id="section-5.5-2">UUIDv5 values are created by computing an SHA1 <span>[<a href="#SHA1" class="cite xref">SHA1</a>]</span>
 hash over a given name space value concatenated with the desired name value
 after both have been converted to a canonical sequence of octets in network byte order.
-This SHA1 value is then uses to populate all 128 bits of the UUID layout. Excess bits beyond 128 are discarded.
+This SHA1 value is then used to populate all 128 bits of the UUID layout. Excess bits beyond 128 are discarded.
 The UUID version and variant then replace the respective bits as defined by <a href="#version_field" class="auto internal xref">Section 4.2</a> and <a href="#variant_field" class="auto internal xref">Section 4.1</a><a href="#section-5.5-2" class="pilcrow">¶</a></p>
 <p id="section-5.5-3">Some common name space values have been defined via <a href="#namespaces" class="auto internal xref">Appendix B.2</a>.<a href="#section-5.5-3" class="pilcrow">¶</a></p>
-<p id="section-5.5-4">For more information on MD5 security considerations see <span>[<a href="#RFC6194" class="cite xref">RFC6194</a>]</span>.<a href="#section-5.5-4" class="pilcrow">¶</a></p>
 <span id="name-uuidv5-field-and-bit-layout"></span><figure id="figure-9">
-          <div class="alignLeft art-text artwork" id="section-5.5-5.1">
+          <div class="alignLeft art-text artwork" id="section-5.5-4.1">
 <pre>
  0                   1                   2                   3
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
@@ -2269,37 +2282,37 @@ The UUID version and variant then replace the respective bits as defined by <a h
 <figcaption><a href="#figure-9" class="selfRef">Figure 9</a>:
 <a href="#name-uuidv5-field-and-bit-layout" class="selfRef">UUIDv5 Field and Bit Layout</a>
           </figcaption></figure>
-<span class="break"></span><dl class="dlNewline" id="section-5.5-6">
-          <dt id="section-5.5-6.1">sha_high:</dt>
-          <dd style="margin-left: 1.5em" id="section-5.5-6.2">
-            <p id="section-5.5-6.2.1">The first 48 bits of the layout are filled
+<span class="break"></span><dl class="dlNewline" id="section-5.5-5">
+          <dt id="section-5.5-5.1">sha_high:</dt>
+          <dd style="margin-left: 1.5em" id="section-5.5-5.2">
+            <p id="section-5.5-5.2.1">The first 48 bits of the layout are filled
 with the most significant, left-most 48 bits
-from the computed SHA1 value.<a href="#section-5.5-6.2.1" class="pilcrow">¶</a></p>
+from the computed SHA1 value.<a href="#section-5.5-5.2.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-5.5-6.3">ver:</dt>
-          <dd style="margin-left: 1.5em" id="section-5.5-6.4">
-            <p id="section-5.5-6.4.1">The 4 bit version field as defined by <a href="#version_field" class="auto internal xref">Section 4.2</a><a href="#section-5.5-6.4.1" class="pilcrow">¶</a></p>
+<dt id="section-5.5-5.3">ver:</dt>
+          <dd style="margin-left: 1.5em" id="section-5.5-5.4">
+            <p id="section-5.5-5.4.1">The 4 bit version field as defined by <a href="#version_field" class="auto internal xref">Section 4.2</a><a href="#section-5.5-5.4.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-5.5-6.5">sha_mid:</dt>
-          <dd style="margin-left: 1.5em" id="section-5.5-6.6">
-            <p id="section-5.5-6.6.1">12 more bits of the layout consisting of the least significant,
+<dt id="section-5.5-5.5">sha_mid:</dt>
+          <dd style="margin-left: 1.5em" id="section-5.5-5.6">
+            <p id="section-5.5-5.6.1">12 more bits of the layout consisting of the least significant,
 right-most 12 bits of 16 bits immediately following md5_high
-from the computed SHA1 value.<a href="#section-5.5-6.6.1" class="pilcrow">¶</a></p>
+from the computed SHA1 value.<a href="#section-5.5-5.6.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-5.5-6.7">var:</dt>
-          <dd style="margin-left: 1.5em" id="section-5.5-6.8">
-            <p id="section-5.5-6.8.1">The 2 bit variant field as defined by <a href="#variant_field" class="auto internal xref">Section 4.1</a>.<a href="#section-5.5-6.8.1" class="pilcrow">¶</a></p>
+<dt id="section-5.5-5.7">var:</dt>
+          <dd style="margin-left: 1.5em" id="section-5.5-5.8">
+            <p id="section-5.5-5.8.1">The 2 bit variant field as defined by <a href="#variant_field" class="auto internal xref">Section 4.1</a>.<a href="#section-5.5-5.8.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-5.5-6.9">sha_low:</dt>
-          <dd style="margin-left: 1.5em" id="section-5.5-6.10">
-            <p id="section-5.5-6.10.1">The final 62 bits of the layout immediately following the var field to be
+<dt id="section-5.5-5.9">sha_low:</dt>
+          <dd style="margin-left: 1.5em" id="section-5.5-5.10">
+            <p id="section-5.5-5.10.1">The final 62 bits of the layout immediately following the var field to be
 filled by skipping the 2 most significant, left-most bits of the remaining SHA1 hash
 and then using the next 62 most significant, left-most bits.
-Any leftover SHA1 bits are discarded and unused.<a href="#section-5.5-6.10.1" class="pilcrow">¶</a></p>
+Any leftover SHA1 bits are discarded and unused.<a href="#section-5.5-5.10.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 </dl>
@@ -2314,7 +2327,7 @@ Any leftover SHA1 bits are discarded and unused.<a href="#section-5.5-6.10.1" cl
 DB locality.
 It is expected that UUIDv6 will primarily be used in contexts where there
 are existing v1 UUIDs.
-Systems that do not involve legacy UUIDv1 <span class="bcp14">SHOULD</span> consider using UUIDv7 instead.<a href="#section-5.6-1" class="pilcrow">¶</a></p>
+Systems that do not involve legacy UUIDv1 <span class="bcp14">SHOULD</span> use UUIDv7 instead.<a href="#section-5.6-1" class="pilcrow">¶</a></p>
 <p id="section-5.6-2">Instead of splitting the timestamp into the low, mid and high sections from
 UUIDv1, UUIDv6 changes this sequence so timestamp bytes are stored from most
 to least significant.
@@ -2323,8 +2336,8 @@ for UUIDv6, the first 48 most significant bits are stored
 first, followed by the 4 bit version (same position), followed by the remaining
 12 bits of the original 60 bit timestamp.<a href="#section-5.6-2" class="pilcrow">¶</a></p>
 <p id="section-5.6-3">The clock sequence bits remain unchanged from their usage and position in <a href="#uuidv1" class="auto internal xref">Section 5.1</a>.<a href="#section-5.6-3" class="pilcrow">¶</a></p>
-<p id="section-5.6-4">The 48 bit node <span class="bcp14">SHOULD</span> be set to a pseudo-random value however implementations
-<span class="bcp14">MAY</span> choose to retain the old MAC address behavior from <a href="#uuidv1" class="auto internal xref">Section 5.1</a> and <a href="#unidentifiable" class="auto internal xref">Section 6.9</a>. For more information on MAC address usage within UUIDs see the <a href="#Security" class="auto internal xref">Section 9</a><a href="#section-5.6-4" class="pilcrow">¶</a></p>
+<p id="section-5.6-4">The 48 bit node <span class="bcp14">SHOULD</span> be set to a pseudo-random value; however, implementations
+<span class="bcp14">MAY</span> choose to retain the old MAC address behavior from <a href="#uuidv1" class="auto internal xref">Section 5.1</a> and <a href="#unidentifiable" class="auto internal xref">Section 6.9</a>. For more information on MAC address usage within UUIDs see <a href="#Security" class="auto internal xref">Section 9</a>.<a href="#section-5.6-4" class="pilcrow">¶</a></p>
 <p id="section-5.6-5">The format for the 16-byte, 128 bit UUIDv6 is shown in <a href="#v6layout" class="auto internal xref">Figure 10</a><a href="#section-5.6-5" class="pilcrow">¶</a></p>
 <span id="name-uuidv6-field-and-bit-layout"></span><div id="v6layout">
 <figure id="figure-10">
@@ -2405,8 +2418,8 @@ UUIDv1 implementation.<a href="#section-5.6-8" class="pilcrow">¶</a></p>
 <p id="section-5.7-1">UUID version 7 features a time-ordered value field derived from the widely
 implemented and well known Unix Epoch timestamp source, the number of milliseconds
 seconds since midnight 1 Jan 1970 UTC, leap seconds excluded.
-As well as improved entropy characteristics over versions 1 or 6.<a href="#section-5.7-1" class="pilcrow">¶</a></p>
-<p id="section-5.7-2">Implementations <span class="bcp14">SHOULD</span> utilize UUID version 7 over UUID version 1 and 6 if
+UUID verion 7 also has improved entropy characteristics over versions 1 or 6.<a href="#section-5.7-1" class="pilcrow">¶</a></p>
+<p id="section-5.7-2">Implementations <span class="bcp14">SHOULD</span> utilize UUID version 7 instead of UUID version 1 and 6 if
 possible.<a href="#section-5.7-2" class="pilcrow">¶</a></p>
 <span id="name-uuidv7-field-and-bit-layout"></span><figure id="figure-11">
           <div class="alignLeft art-text artwork" id="section-5.7-3.1">
@@ -2430,7 +2443,7 @@ possible.<a href="#section-5.7-2" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlNewline" id="section-5.7-4">
           <dt id="section-5.7-4.1">unix_ts_ms:</dt>
           <dd style="margin-left: 1.5em" id="section-5.7-4.2">
-            <p id="section-5.7-4.2.1">48 bit big-endian unsigned number of Unix epoch timestamp in milliseconds as per <a href="#timestamp_granularity" class="auto internal xref">Section 6.1</a>.<a href="#section-5.7-4.2.1" class="pilcrow">¶</a></p>
+            <p id="section-5.7-4.2.1">48 bit big-endian unsigned number of Unix epoch timestamp as per <a href="#timestamp_considerations" class="auto internal xref">Section 6.1</a>.<a href="#section-5.7-4.2.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-5.7-4.3">ver:</dt>
@@ -2440,7 +2453,7 @@ possible.<a href="#section-5.7-2" class="pilcrow">¶</a></p>
           <dd class="break"></dd>
 <dt id="section-5.7-4.5">rand_a:</dt>
           <dd style="margin-left: 1.5em" id="section-5.7-4.6">
-            <p id="section-5.7-4.6.1">12 bits pseudo-random data to provide uniqueness as per <a href="#unguessability" class="auto internal xref">Section 6.8</a> and/or an optional counter to guarantee additional monotonicity as per <a href="#monotonicity_counters" class="auto internal xref">Section 6.2</a>.<a href="#section-5.7-4.6.1" class="pilcrow">¶</a></p>
+            <p id="section-5.7-4.6.1">12 bits pseudo-random data to provide uniqueness as per <a href="#monotonicity_counters" class="auto internal xref">Section 6.2</a> and <a href="#unguessability" class="auto internal xref">Section 6.8</a>.<a href="#section-5.7-4.6.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-5.7-4.7">var:</dt>
@@ -2450,7 +2463,7 @@ possible.<a href="#section-5.7-2" class="pilcrow">¶</a></p>
           <dd class="break"></dd>
 <dt id="section-5.7-4.9">rand_b:</dt>
           <dd style="margin-left: 1.5em" id="section-5.7-4.10">
-            <p id="section-5.7-4.10.1">The final 62 bits of pseudo-random data to provide uniqueness as per <a href="#unguessability" class="auto internal xref">Section 6.8</a> and/or an optional counter to guarantee additional monotonicity as per <a href="#monotonicity_counters" class="auto internal xref">Section 6.2</a>.<a href="#section-5.7-4.10.1" class="pilcrow">¶</a></p>
+            <p id="section-5.7-4.10.1">The final 62 bits of pseudo-random data to provide uniqueness as per <a href="#monotonicity_counters" class="auto internal xref">Section 6.2</a> and <a href="#unguessability" class="auto internal xref">Section 6.8</a>.<a href="#section-5.7-4.10.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 </dl>
@@ -2465,10 +2478,10 @@ possible.<a href="#section-5.7-2" class="pilcrow">¶</a></p>
 use cases.
 The only requirement is that the variant and version bits <span class="bcp14">MUST</span> be set as
 defined in <a href="#variant_field" class="auto internal xref">Section 4.1</a> and <a href="#version_field" class="auto internal xref">Section 4.2</a>.
-UUIDv8's uniqueness will be implementation-specific and <span class="bcp14">MUST NOT</span> be assumed.<a href="#section-5.8-1" class="pilcrow">¶</a></p>
+UUIDv8's uniqueness will be implementation-specific and <span class="bcp14">SHOULD NOT</span> be assumed.<a href="#section-5.8-1" class="pilcrow">¶</a></p>
 <p id="section-5.8-2">The only explicitly defined bits are the Version and Variant leaving 122
 bits
-for implementation specific UUIDs. To be clear:
+for implementation specific time-based UUIDs. To be clear:
 UUIDv8 is not a replacement for UUIDv4 where all 122 extra bits are
 filled with random data.<a href="#section-5.8-2" class="pilcrow">¶</a></p>
 <p id="section-5.8-3">Some example situations in which UUIDv8 usage could occur:<a href="#section-5.8-3" class="pilcrow">¶</a></p>
@@ -2578,16 +2591,16 @@ FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF
 described in this document for each version.
 Everything else is an implementation detail and
 up to the implementer to decide what is appropriate for a given
-implementation. That being said, various relevant factors are covered
+implementation. Various relevant factors are covered
 below to help guide an implementer through the different trade-offs among
 differing UUID implementations.<a href="#section-6-1" class="pilcrow">¶</a></p>
-<div id="timestamp_granularity">
+<div id="timestamp_considerations">
 <section id="section-6.1">
-        <h3 id="name-timestamp-granularity">
-<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-timestamp-granularity" class="section-name selfRef">Timestamp Granularity</a>
+        <h3 id="name-timestamp-considerations">
+<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-timestamp-considerations" class="section-name selfRef">Timestamp Considerations</a>
         </h3>
 <p id="section-6.1-1">UUID timestamp source, precision and length was the topic of great debate
-while creating UUIDv7 for this specification. As such choosing the right timestamp for
+while creating UUIDv7 for this specification. Choosing the right timestamp for
 your application is a very important topic. This section will detail some
 of the most common points on this topic.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlNewline" id="section-6.1-2">
@@ -2608,7 +2621,7 @@ or Smearing bullet below.)<a href="#section-6.1-2.2.1" class="pilcrow">¶</a></p
           <dd style="margin-left: 1.5em" id="section-6.1-2.4">
             <p id="section-6.1-2.4.1">UUID version 1 and 6 both utilize a Gregorian epoch timestamp while UUIDv7
 utilizes a Unix Epoch timestamp. If other timestamp sources or a custom timestamp
-epoch are required UUIDv8 <span class="bcp14">SHOULD</span> be leveraged.<a href="#section-6.1-2.4.1" class="pilcrow">¶</a></p>
+epoch are required UUIDv8 <span class="bcp14">SHOULD</span> be used.<a href="#section-6.1-2.4.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-6.1-2.5">Sub-second Precision and Accuracy:</dt>
@@ -2645,10 +2658,10 @@ bit timestamp.<a href="#section-6.1-2.8.1" class="pilcrow">¶</a></p>
           <dd class="break"></dd>
 <dt id="section-6.1-2.9">Altering, Fuzzing, or Smearing:</dt>
           <dd style="margin-left: 1.5em" id="section-6.1-2.10">
-            <p id="section-6.1-2.10.1">Implementations <span class="bcp14">MAY</span> alter the actual timestamp. Some examples included security
+            <p id="section-6.1-2.10.1">Implementations <span class="bcp14">MAY</span> alter the actual timestamp. Some examples include security
 considerations around providing a real clock value within a UUID, to correct
-inaccurate clocks or to handle leap seconds. This specification makes no
-requirement or guarantee about how close the clock value needs to be to actual
+inaccurate clocks, or to handle leap seconds. This specification makes no
+requirement or guarantee about how close the clock value needs to be to the actual
 time.
 If UUIDs do not need to be frequently generated, the UUIDv1 or UUIDv6 timestamp can
 simply be the system time multiplied by the number of 100-nanosecond
@@ -2659,13 +2672,13 @@ intervals per system time interval.<a href="#section-6.1-2.10.1" class="pilcrow"
           <dd style="margin-left: 1.5em" id="section-6.1-2.12">
             <p id="section-6.1-2.12.1">When timestamp padding is required, implementations <span class="bcp14">MUST</span> pad the most significant
 bits (left-most) bits with zeros. An example is padding the most significant,
-left-most bits of a 32 bit Unix timestamp with zero's to fill out the 48
+left-most bits of a 32 bit Unix timestamp with zeros to fill out the 48
 bit timestamp in UUIDv7.<a href="#section-6.1-2.12.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-6.1-2.13">Truncating:</dt>
           <dd style="margin-left: 1.5em" id="section-6.1-2.14">
-            <p id="section-6.1-2.14.1">Similarly, when timestamps need to be truncated: the lower, least significant
+            <p id="section-6.1-2.14.1">When timestamps need to be truncated, the lower, least significant
 bits <span class="bcp14">MUST</span> be used. An example would be truncating a 64 bit Unix timestamp
 to the least significant, right-most 48 bits for UUIDv7.<a href="#section-6.1-2.14.1" class="pilcrow">¶</a></p>
 </dd>
@@ -2680,7 +2693,7 @@ Note that if the processors overrun the UUID generation frequently,
 additional node identifiers can be allocated to the system, which
 will permit higher speed allocation by making multiple UUIDs
 potentially available for each time stamp value.
-Similar to <a href="#distributed_shared_knowledge" class="auto internal xref">Section 6.4</a> techniques<a href="#section-6.1-2.16.1" class="pilcrow">¶</a></p>
+Similar techniques are discussed in <a href="#distributed_shared_knowledge" class="auto internal xref">Section 6.4</a>.<a href="#section-6.1-2.16.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 </dl>
@@ -2691,51 +2704,51 @@ Similar to <a href="#distributed_shared_knowledge" class="auto internal xref">Se
         <h3 id="name-monotonicity-and-counters">
 <a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-monotonicity-and-counters" class="section-name selfRef">Monotonicity and Counters</a>
         </h3>
-<p id="section-6.2-1">Monotonicity is the backbone of time-based sortable UUIDs. Naturally time-based
-UUIDs from this document will be monotonic due to an embedded timestamp however
+<p id="section-6.2-1">Monotonicity is the backbone of time-based sortable UUIDs. Normally, time-based
+UUIDs from this document will be monotonic due to an embedded timestamp; however,
 implementations can guarantee additional monotonicity via the concepts covered
 in this section.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
-<p id="section-6.2-2">Additionally, care <span class="bcp14">SHOULD</span> be taken to ensure UUIDs generated in batches are
-also monotonic. That is, if one-thousand UUIDs are generated for the same
-timestamp; there is sufficient logic for organizing the creation order of
-those one-thousand UUIDs.
-For batch UUID creation implementations <span class="bcp14">MAY</span> utilize a monotonic counter which
+<p id="section-6.2-2">Care <span class="bcp14">SHOULD</span> be taken to ensure UUIDs generated in batches are
+also monotonic. That is, if one thousand UUIDs are generated for the same
+timestamp, there <span class="bcp14">SHOULD</span> be sufficient logic for organizing the creation order of
+those one thousand UUIDs.
+Batch UUID creation implementations <span class="bcp14">MAY</span> utilize a monotonic counter that
 <span class="bcp14">SHOULD</span> increment for each UUID created during a given timestamp.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
 <p id="section-6.2-3">For single-node UUID implementations that do not need to create batches of
 UUIDs, the embedded timestamp within UUID version 1, 6, and 7 can provide
 sufficient monotonicity guarantees by simply ensuring that timestamp increments
-before creating a new UUID. For the topic of Distributed Nodes please refer
-to <a href="#distributed_shared_knowledge" class="auto internal xref">Section 6.4</a><a href="#section-6.2-3" class="pilcrow">¶</a></p>
+before creating a new UUID. Distributed nodes are discussed in
+<a href="#distributed_shared_knowledge" class="auto internal xref">Section 6.4</a>.<a href="#section-6.2-3" class="pilcrow">¶</a></p>
 <p id="section-6.2-4">Implementations <span class="bcp14">SHOULD</span> choose one method for single-node UUID implementations
 that require batch UUID creation.<a href="#section-6.2-4" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlNewline" id="section-6.2-5">
           <dt id="section-6.2-5.1">Fixed-Length Dedicated Counter Bits (Method 1):</dt>
           <dd style="margin-left: 1.5em" id="section-6.2-5.2">
-            <p id="section-6.2-5.2.1">This references the practice of allocating a specific number of bits in the
+            <p id="section-6.2-5.2.1">Some implementations allocate a specific number of bits in the
 UUID layout to the sole purpose of tallying the total number of UUIDs created
 during a given UUID timestamp tick.
-Positioning of a fixed bit-length counter <span class="bcp14">SHOULD</span> be immediately after the
+A fixed bit-length counter, if present, <span class="bcp14">SHOULD</span> be positioned immediately after the
 embedded timestamp. This promotes sortability and allows random data generation
 for each counter increment.
-With this method rand_a section of UUIDv7 <span class="bcp14">SHOULD</span> be utilized as fixed-length
+With this method, the rand_a section of UUIDv7 <span class="bcp14">SHOULD</span> be used as fixed-length
 dedicated counter bits that are incremented by one for every UUID generation.
 The trailing random bits generated for each new UUID in rand_b can help produce
-unguessable UUIDs. In the event more counter bits are required the most significant,
-left-most, bits of rand_b <span class="bcp14">MAY</span> be leveraged as additional counter bits.<a href="#section-6.2-5.2.1" class="pilcrow">¶</a></p>
+unguessable UUIDs. In the event more counter bits are required, the most significant
+(left-most) bits of rand_b <span class="bcp14">MAY</span> be used as additional counter bits.<a href="#section-6.2-5.2.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-6.2-5.3">Monotonic Random (Method 2):</dt>
           <dd style="margin-left: 1.5em" id="section-6.2-5.4">
-            <p id="section-6.2-5.4.1">With this method the random data is extended to also double as a counter.
-This monotonic random can be thought of as a "randomly seeded counter" which
+            <p id="section-6.2-5.4.1">With this method, the random data is extended to also function as a counter.
+This monotonic value can be thought of as a "randomly seeded counter" which
 <span class="bcp14">MUST</span> be incremented in the least significant position for each UUID created
 on a given timestamp tick.
 UUIDv7's rand_b section <span class="bcp14">SHOULD</span> be utilized with this method to handle batch
 UUID generation during a single timestamp tick.
 The increment value for every UUID generation <span class="bcp14">SHOULD</span> be a random integer
 of any desired length larger than zero. It ensures the UUIDs retain the required
-level of unguessability characters provided by the underlying entropy.
-The increment value <span class="bcp14">MAY</span> be one when the amount of UUIDs generated in a particular
+level of unguessability provided by the underlying entropy.
+The increment value <span class="bcp14">MAY</span> be one when the number of UUIDs generated in a particular
 period of time is important and guessability is not an issue. However, it
 <span class="bcp14">SHOULD NOT</span> be used by implementations that favor unguessiblity, as the resulting
 values are easily guessable.<a href="#section-6.2-5.4.1" class="pilcrow">¶</a></p>
@@ -2747,11 +2760,11 @@ fixed-length dedicated counters:<a href="#section-6.2-6" class="pilcrow">¶</a><
 <span class="break"></span><dl class="dlNewline" id="section-6.2-7">
           <dt id="section-6.2-7.1">Fixed-Length Dedicated Counter Seeding:</dt>
           <dd style="margin-left: 1.5em" id="section-6.2-7.2">
-            <p id="section-6.2-7.2.1">Implementations utilizing fixed-length counter method <span class="bcp14">SHOULD</span> randomly initialize
+            <p id="section-6.2-7.2.1">Implementations utilizing the fixed-length counter method <span class="bcp14">SHOULD</span> randomly initialize
 the counter with each new timestamp tick.
-However, when the timestamp has not incremented; the counter <span class="bcp14">SHOULD</span> be frozen
+However, when the timestamp has not incremented, the counter <span class="bcp14">SHOULD</span> be frozen
 and incremented via the desired increment logic.
-When utilizing a randomly seeded counter alongside Method 1; the random <span class="bcp14">MAY</span>
+When utilizing a randomly seeded counter alongside Method 1, the random value <span class="bcp14">MAY</span>
 be regenerated with each counter increment without impacting sortability.
 The downside is that Method 1 is prone to overflows if a counter of adequate
 length is not selected or the random data generated leaves little room for
@@ -2768,7 +2781,7 @@ counter rollovers.<a href="#section-6.2-7.2.1" class="pilcrow">¶</a></p>
           <dd style="margin-left: 1.5em" id="section-6.2-7.4">
             <p id="section-6.2-7.4.1">Care <span class="bcp14">MUST</span> be taken to select a counter bit-length that can properly handle
 the level of timestamp precision in use.
-For example, millisecond precision <span class="bcp14">SHOULD</span> require a larger counter than a
+For example, millisecond precision generally requires a larger counter than a
 timestamp with nanosecond precision.
 General guidance is that the counter <span class="bcp14">SHOULD</span> be at least 12 bits but no longer
 than 42 bits.
@@ -2784,10 +2797,10 @@ method:<a href="#section-6.2-8" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlNewline" id="section-6.2-9">
           <dt id="section-6.2-9.1">Counter Rollover Guards:</dt>
           <dd style="margin-left: 1.5em" id="section-6.2-9.2">
-            <p id="section-6.2-9.2.1">The technique from Fixed-Length Dedicated Counter Seeding which describes
+            <p id="section-6.2-9.2.1">The technique from Fixed-Length Dedicated Counter Seeding that describes
 allocating a segment of the fixed-length counter as a rollover guard is also
 helpful to mitigate counter rollover issues.
-This same technique can be leveraged with Monotonic random counter methods
+This same technique can be used with monotonic random counter methods
 by ensuring the total length of a possible increment in the least significant,
 right most position is less than the total length of the random being incremented.
 As such the most significant, left-most, bits can be incremented as rollover
@@ -2810,19 +2823,19 @@ counters are monotonic in nature:<a href="#section-6.2-10" class="pilcrow">¶</a
 <ol start="1" type="1" class="normal type-1" id="section-6.2-11">
 <li id="section-6.2-11.1">Compare the current timestamp against the previously stored timestamp.<a href="#section-6.2-11.1" class="pilcrow">¶</a>
 </li>
-          <li id="section-6.2-11.2">If the current timestamp is equal to the previous timestamp; increment the
+          <li id="section-6.2-11.2">If the current timestamp is equal to the previous timestamp, increment the
   counter according to the desired method.<a href="#section-6.2-11.2" class="pilcrow">¶</a>
 </li>
-          <li id="section-6.2-11.3">If the current timestamp is greater than the previous timestamp; re-initialize
+          <li id="section-6.2-11.3">If the current timestamp is greater than the previous timestamp, re-initialize
   the desired counter method to the new timestamp and generate new random bytes
   (if the bytes were frozen or being used as the seed for a monotonic counter).<a href="#section-6.2-11.3" class="pilcrow">¶</a>
 </li>
         </ol>
 <p id="section-6.2-12">Implementations <span class="bcp14">SHOULD</span> check if the the currently generated UUID is greater
 than the previously generated UUID. If this is not the case then any number
-of things could have occurred. Such as, but not limited to, clock rollbacks,
-leap second handling or counter rollovers. Applications <span class="bcp14">SHOULD</span> embed sufficient
-logic to catch these scenarios and correct the problem ensuring the next
+of things could have occurred, such as clock rollbacks,
+leap second handling, and counter rollovers. Applications <span class="bcp14">SHOULD</span> embed sufficient
+logic to catch these scenarios and correct the problem to ensure that the next
 UUID generated is greater than the previous. To handle this scenario, the
 general guidance is that application <span class="bcp14">MAY</span> reuse the previous timestamp and
 increment the previous counter method.<a href="#section-6.2-12" class="pilcrow">¶</a></p>
@@ -2833,7 +2846,7 @@ increment the previous counter method.<a href="#section-6.2-12" class="pilcrow">
         <h3 id="name-uuid-generator-states">
 <a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-uuid-generator-states" class="section-name selfRef">UUID Generator States</a>
         </h3>
-<p id="section-6.3-1">The UUID Generator state only needs to be read from stable storage once at boot
+<p id="section-6.3-1">The UUID generator state only needs to be read from stable storage once at boot
 time, if it is read into a system-wide shared volatile store (and
 updated whenever the stable store is updated).<a href="#section-6.3-1" class="pilcrow">¶</a></p>
 <p id="section-6.3-2">If an implementation does not have any stable store available, then
@@ -2841,10 +2854,11 @@ it can always say that the values were unavailable.  This is the
 least desirable implementation because it will increase the frequency
 of creation of values such as clock sequence, counters or random data which increases the
 probability of duplicates.<a href="#section-6.3-2" class="pilcrow">¶</a></p>
-<p id="section-6.3-3">For UUIDv1 and UUIDv6, if the node ID can never change (e.g., the net card is inseparable
+<p id="section-6.3-3">For UUIDv1 and UUIDv6, if the node ID can never change (e.g., the network interface card
+from which the node ID is derived is inseparable
 from the system), or if any change also reinitializes the clock
 sequence to a random value, then instead of keeping it in stable
-store, the current node ID may be returned<a href="#section-6.3-3" class="pilcrow">¶</a></p>
+store, the current node ID may be returned.<a href="#section-6.3-3" class="pilcrow">¶</a></p>
 <p id="section-6.3-4">For UUIDv1 and UUIDv6, the state does not always need to be written to stable store every
 time a UUID is generated.  The timestamp in the stable store can be
 periodically set to a value larger than any yet used in a UUID.  As
@@ -2877,10 +2891,10 @@ UUID implementations in distributed environments.<a href="#section-6.4-2" class=
           <dt id="section-6.4-3.1">Centralized Registry:</dt>
           <dd style="margin-left: 1.5em" id="section-6.4-3.2">
             <p id="section-6.4-3.2.1">With this method all nodes tasked with creating UUIDs consult a central registry
-and confirm the generated value is unique. As applications scale the communication
+and confirm the generated value is unique. As applications scale, the communication
 with the central registry could become a bottleneck and impact UUID generation
-in a negative way. Utilization of shared knowledge schemes with central/global
-registries is outside the scope of this specification and should generally be discouraged.<a href="#section-6.4-3.2.1" class="pilcrow">¶</a></p>
+in a negative way. Shared knowledge schemes with central/global
+registries are outside the scope of this specification and should generally be discouraged.<a href="#section-6.4-3.2.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-6.4-3.3">Node IDs:</dt>
@@ -2900,13 +2914,10 @@ is also out of scope for this specification.<a href="#section-6.4-3.4.1" class="
 </dd>
         <dd class="break"></dd>
 </dl>
-<p id="section-6.4-4">Utilization of either a Centralized Registry or Node ID are not required
-for implementing UUIDs in this specification. However implementations <span class="bcp14">SHOULD</span>
+<p id="section-6.4-4">Utilization of either a centralized registry or Node ID is not required
+for implementing UUIDs in this specification. However, implementations <span class="bcp14">SHOULD</span>
 utilize one of the two aforementioned methods if distributed UUID generation
 is a requirement.<a href="#section-6.4-4" class="pilcrow">¶</a></p>
-<p id="section-6.4-5">Distributed applications generating UUIDs at a variety of hosts must
-be willing to rely on the random number source at all hosts.  If this
-is not feasible, the namespace variant should be used.<a href="#section-6.4-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="name_based_uuid_generation">
@@ -2924,13 +2935,13 @@ their uniqueness within their name spaces are beyond the scope of
 this specification.<a href="#section-6.5-2" class="pilcrow">¶</a></p>
 <p id="section-6.5-3">The requirements for these types of UUIDs are as follows:<a href="#section-6.5-3" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-6.5-4.1">The UUIDs generated at different times from the same name in the
+<li class="normal" id="section-6.5-4.1">UUIDs generated at different times from the same name in the
 same namespace <span class="bcp14">MUST</span> be equal.<a href="#section-6.5-4.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.5-4.2">The UUIDs generated from two different names in the same namespace
+          <li class="normal" id="section-6.5-4.2">UUIDs generated from two different names in the same namespace
 should be different (with very high probability).<a href="#section-6.5-4.2" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.5-4.3">The UUIDs generated from the same name in two different namespaces
+          <li class="normal" id="section-6.5-4.3">UUIDs generated from the same name in two different namespaces
 should be different (with very high probability).<a href="#section-6.5-4.3" class="pilcrow">¶</a>
 </li>
           <li class="normal" id="section-6.5-4.4">If two UUIDs that were generated from names are equal, then they
@@ -2946,8 +2957,8 @@ high probability).<a href="#section-6.5-4.4" class="pilcrow">¶</a>
 <a href="#section-6.6" class="section-number selfRef">6.6. </a><a href="#name-collision-resistance" class="section-name selfRef">Collision Resistance</a>
         </h3>
 <p id="section-6.6-1">Implementations <span class="bcp14">SHOULD</span> weigh the consequences of UUID collisions within their
-application and when deciding between UUID versions that use entropy (random)
-versus the other components such as <a href="#timestamp_granularity" class="auto internal xref">Section 6.1</a> and <a href="#monotonicity_counters" class="auto internal xref">Section 6.2</a>.
+application and when deciding between UUID versions that use entropy (randomness)
+versus the other components such as those in <a href="#timestamp_considerations" class="auto internal xref">Section 6.1</a> and <a href="#monotonicity_counters" class="auto internal xref">Section 6.2</a>.
 This is especially true for distributed node collision resistance as defined
 by <a href="#distributed_shared_knowledge" class="auto internal xref">Section 6.4</a>.<a href="#section-6.6-1" class="pilcrow">¶</a></p>
 <p id="section-6.6-2">There are two example scenarios below which help illustrate the varying seriousness
@@ -2985,7 +2996,7 @@ unique within a database <span class="bcp14">MAY</span> be sufficient for some i
 global uniqueness outside of the application context, in other applications,
 or around the world is not required.<a href="#section-6.7-1" class="pilcrow">¶</a></p>
 <p id="section-6.7-2">Although true global uniqueness is impossible to guarantee without a shared
-knowledge scheme; a shared knowledge scheme is not required by UUID to provide
+knowledge scheme, a shared knowledge scheme is not required by UUID to provide
 uniqueness guarantees.
 Implementations <span class="bcp14">MAY</span> implement a shared knowledge scheme introduced in <a href="#distributed_shared_knowledge" class="auto internal xref">Section 6.4</a> as they see fit to extend the uniqueness guaranteed this specification.<a href="#section-6.7-2" class="pilcrow">¶</a></p>
 </section>
@@ -2995,7 +3006,7 @@ Implementations <span class="bcp14">MAY</span> implement a shared knowledge sche
         <h3 id="name-unguessability">
 <a href="#section-6.8" class="section-number selfRef">6.8. </a><a href="#name-unguessability" class="section-name selfRef">Unguessability</a>
         </h3>
-<p id="section-6.8-1">TODO: Here or in security considerations, discuss security considerations with with "running out of random"<a href="#section-6.8-1" class="pilcrow">¶</a></p>
+<p id="section-6.8-1">TODO: Here or in security considerations, discuss security considerations with "running out of random"<a href="#section-6.8-1" class="pilcrow">¶</a></p>
 <p id="section-6.8-2">Implementations <span class="bcp14">SHOULD</span> utilize a cryptographically secure pseudo-random number
 generator (CSPRNG) to provide values that are both difficult to predict ("unguessable")
 and have a low likelihood of collision ("unique").
@@ -3015,7 +3026,7 @@ CSPRNG ensures the best of <a href="#collision_resistance" class="auto internal 
 <p id="section-6.9-2">One approach is to contact the IEEE and get a separate block of
 addresses.  At the time of writing, the application could be found at
 <span><a href="https://standards.ieee.org/products-programs/regauth/">https://standards.ieee.org/products-programs/regauth/</a></span>.<a href="#section-6.9-2" class="pilcrow">¶</a></p>
-<p id="section-6.9-3">A better solution is to obtain a 47-bit cryptographic quality random
+<p id="section-6.9-3">A better solution is to obtain a 47-bit cryptographic-quality random
 number and use it as the low 47 bits of the node ID, with the least
 significant bit of the first octet of the node ID set to one.  This
 bit is the unicast/multicast bit, which will never be set in IEEE 802
@@ -3052,10 +3063,10 @@ because the new values are near each other in the index.
 As a result objects are more easily clustered together for better performance.
 The real-world differences in this approach of index locality vs random data
 inserts can be quite large.<a href="#section-6.10-2" class="pilcrow">¶</a></p>
-<p id="section-6.10-3">UUIDs formats created by this specification <span class="bcp14">SHOULD</span> be Lexicographically sortable
+<p id="section-6.10-3">UUIDs formats created by this specification <span class="bcp14">SHOULD</span> be lexicographically sortable
 while in the textual representation.<a href="#section-6.10-3" class="pilcrow">¶</a></p>
-<p id="section-6.10-4">UUIDs created by this specification are crafted with big-ending byte order
-(network byte order) in mind. If Little-endian style is required a custom
+<p id="section-6.10-4">UUIDs created by this specification are crafted with big-endian byte order
+(network byte order) in mind. If little-endian style is required a custom
 UUID format <span class="bcp14">SHOULD</span> be created using UUIDv8.<a href="#section-6.10-4" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -3065,8 +3076,8 @@ UUID format <span class="bcp14">SHOULD</span> be created using UUIDv8.<a href="#
 <a href="#section-6.11" class="section-number selfRef">6.11. </a><a href="#name-opacity" class="section-name selfRef">Opacity</a>
         </h3>
 <p id="section-6.11-1">UUIDs <span class="bcp14">SHOULD</span> be treated as opaque values and implementations <span class="bcp14">SHOULD NOT</span> examine
-the bits in a UUID to whatever extent is possible. However, where necessary,
-inspectors should refer to <a href="#variant_field" class="auto internal xref">Section 4.1</a> and <a href="#version_field" class="auto internal xref">Section 4.2</a> for more information on determining UUID version and variant.<a href="#section-6.11-1" class="pilcrow">¶</a></p>
+the bits in a UUID. However,
+inspectors <span class="bcp14">MAY</span> refer to <a href="#variant_field" class="auto internal xref">Section 4.1</a> and <a href="#version_field" class="auto internal xref">Section 4.2</a> when required to determine UUID version and variant.<a href="#section-6.11-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="database_considerations">
@@ -3079,7 +3090,7 @@ verbose, requiring 288 bits to represent 128 bit UUID values.
 Thus, where feasible, UUIDs <span class="bcp14">SHOULD</span> be stored within database applications
 as the underlying 128 bit binary value.<a href="#section-6.12-1" class="pilcrow">¶</a></p>
 <p id="section-6.12-2">For other systems, UUIDs <span class="bcp14">MAY</span> be stored in binary form or as text, as appropriate.
-The trade-offs to both approaches are as such:<a href="#section-6.12-2" class="pilcrow">¶</a></p>
+The trade-offs to both approaches are:<a href="#section-6.12-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.12-3.1">Storing as binary requires less space and may result in faster data access.<a href="#section-6.12-3.1" class="pilcrow">¶</a>
 </li>
@@ -3117,8 +3128,8 @@ TODO: Need to ensure IANA doc, https://www.iana.org/assignments/urn-namespaces/u
       </h2>
 <p id="section-8-1">The use of UUIDs is extremely pervasive in computing.  They comprise
 the core identifier infrastructure for many operating systems
-(Microsoft Windows) and applications (the Mozilla browser) and in
-many cases, become exposed to the Web in many non-standard ways.<a href="#section-8-1" class="pilcrow">¶</a></p>
+such as Microsoft Windows and applications such as the Mozilla Web browser and in
+many cases, become exposed in many non-standard ways.<a href="#section-8-1" class="pilcrow">¶</a></p>
 <p id="section-8-2">This specification attempts to standardize that practice as openly as
 possible and in a way that attempts to benefit the entire Internet.<a href="#section-8-2" class="pilcrow">¶</a></p>
 </section>
@@ -3128,28 +3139,32 @@ possible and in a way that attempts to benefit the entire Internet.<a href="#sec
       <h2 id="name-security-considerations">
 <a href="#section-9" class="section-number selfRef">9. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-9-1">Do not assume that UUIDs are hard to guess; they should not be used
+<p id="section-9-1">Implementations <span class="bcp14">MUST NOT</span> assume that UUIDs are hard to guess.
+Foe example, they MUT not be used
 as security capabilities (identifiers whose mere possession grants
-access), for example.  A predictable random number source will
-exacerbate the situation.<a href="#section-9-1" class="pilcrow">¶</a></p>
-<p id="section-9-2">Do not assume that it is easy to determine if a UUID has been
+access).  Discovery of predictablity in a random number source will
+result in a vulnerability.<a href="#section-9-1" class="pilcrow">¶</a></p>
+<p id="section-9-2">Implementations <span class="bcp14">MUST NOT</span> assume that it is easy to determine if a UUID has been
 slightly transposed in order to redirect a reference to another
 object.  Humans do not have the ability to easily check the integrity
 of a UUID by simply glancing at it.<a href="#section-9-2" class="pilcrow">¶</a></p>
-<p id="section-9-3">MAC addresses pose inherent security risks and <span class="bcp14">SHOULD</span> not be used within
+<p id="section-9-3">Distributed applications generating UUIDs at a variety of hosts <span class="bcp14">MUST</span>
+be willing to rely on the random number source at all hosts.  If this
+is not feasible, the namespace variant should be used.<a href="#section-9-3" class="pilcrow">¶</a></p>
+<p id="section-9-4">MAC addresses pose inherent security risks and <span class="bcp14">SHOULD</span> not be used within
 a UUID.
 Instead CSPRNG data <span class="bcp14">SHOULD</span> be selected from a source with sufficient entropy
 to ensure guaranteed
-uniqueness among UUID generation. See <a href="#unguessability" class="auto internal xref">Section 6.8</a> and <a href="#unidentifiable" class="auto internal xref">Section 6.9</a> for more information.<a href="#section-9-3" class="pilcrow">¶</a></p>
-<p id="section-9-4">Timestamps embedded in the UUID do pose a very small attack surface. The
+uniqueness among UUID generation. See <a href="#unguessability" class="auto internal xref">Section 6.8</a> for more information.<a href="#section-9-4" class="pilcrow">¶</a></p>
+<p id="section-9-5">Timestamps embedded in the UUID do pose a very small attack surface. The
 timestamp in conjunction with
 an embedded counter does signal the order of creation for a given UUID and
-it's corresponding data but
+its corresponding data but
 does not define anything about the data itself or the application as a whole.
 If UUIDs are required for
 use with any security operation within an application context in any shape
-or form then UUIDv4, <a href="#uuidv4" class="auto internal xref">Section 5.4</a> <span class="bcp14">SHOULD</span> be utilized.<a href="#section-9-4" class="pilcrow">¶</a></p>
-<p id="section-9-5">See <span>[<a href="#RFC6151" class="cite xref">RFC6151</a>]</span> for MD5 Security Considerations and <span>[<a href="#RFC6194" class="cite xref">RFC6194</a>]</span> for SHA1 security considerations.<a href="#section-9-5" class="pilcrow">¶</a></p>
+or form then UUIDv4, <a href="#uuidv4" class="auto internal xref">Section 5.4</a> <span class="bcp14">SHOULD</span> be utilized.<a href="#section-9-5" class="pilcrow">¶</a></p>
+<p id="section-9-6">See <span>[<a href="#RFC6151" class="cite xref">RFC6151</a>]</span> for MD5 Security Considerations and <span>[<a href="#RFC6194" class="cite xref">RFC6194</a>]</span> for SHA1 security considerations.<a href="#section-9-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="Acknowledgements">
@@ -3216,9 +3231,9 @@ was also invaluable in achieving coordination with ISO/IEC.<a href="#section-10-
         <dd>
 <span class="refAuthor">Eastlake 3rd, D.</span>, <span class="refAuthor">Schiller, J.</span>, and <span class="refAuthor">S. Crocker</span>, <span class="refTitle">"Randomness Requirements for Security"</span>, <span class="seriesInfo">BCP 106</span>, <span class="seriesInfo">RFC 4086</span>, <span class="seriesInfo">DOI 10.17487/RFC4086</span>, <time datetime="2005-06" class="refDate">June 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc4086">https://www.rfc-editor.org/rfc/rfc4086</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="RFC5234">[RFC5234]</dt>
+<dt id="RFC4234">[RFC4234]</dt>
         <dd>
-<span class="refAuthor">Crocker, D., Ed.</span> and <span class="refAuthor">P. Overell</span>, <span class="refTitle">"Augmented BNF for Syntax Specifications: ABNF"</span>, <span class="seriesInfo">STD 68</span>, <span class="seriesInfo">RFC 5234</span>, <span class="seriesInfo">DOI 10.17487/RFC5234</span>, <time datetime="2008-01" class="refDate">January 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5234">https://www.rfc-editor.org/rfc/rfc5234</a>&gt;</span>. </dd>
+<span class="refAuthor">Crocker, D., Ed.</span> and <span class="refAuthor">P. Overell</span>, <span class="refTitle">"Augmented BNF for Syntax Specifications: ABNF"</span>, <span class="seriesInfo">RFC 4234</span>, <span class="seriesInfo">DOI 10.17487/RFC4234</span>, <time datetime="2005-10" class="refDate">October 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc4234">https://www.rfc-editor.org/rfc/rfc4234</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC6151">[RFC6151]</dt>
         <dd>
@@ -3362,12 +3377,12 @@ zero-filled hexadecimal digit string with the most significant
 digit first.  The hexadecimal values "a" through "f" are output as
 lower case characters and are case insensitive on input.<a href="#appendix-A-2.8.3" class="pilcrow">¶</a></p>
 <p id="appendix-A-2.8.4">The formal definition of the UUID string representation is
-provided by the following ABNF <span>[<a href="#RFC5234" class="cite xref">RFC5234</a>]</span>:<a href="#appendix-A-2.8.4" class="pilcrow">¶</a></p>
+provided by the following ABNF <span>[<a href="#RFC4234" class="cite xref">RFC4234</a>]</span>:<a href="#appendix-A-2.8.4" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
-<div id="appendix-A-3">
-<pre class="lang-abnf sourcecode">
+<div class="lang-abnf sourcecode" id="appendix-A-3">
+<pre>
 UUID                   = time-low "-" time-mid "-"
                          time-high-and-version "-"
                          clock-seq-and-reserved
