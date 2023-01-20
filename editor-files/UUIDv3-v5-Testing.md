@@ -190,7 +190,14 @@ UUID('2ed6657d-e927-568b-95e1-2665a8aea6a2')
 - https://www.uuidtools.com/api/generate/v5/namespace/6ba7b810-9dad-11d1-80b4-00c04fd430c8/name/base64:d3d3LmV4YW1wbGUuY29t
 
 ### Javascript - https://github.com/uuidjs/uuid/blob/main/src/v35.js
-TODO
+
+```bash
+$ npx uuid v3 "www.example.com" DNS
+5df41881-3aed-3515-88a7-2f4a814cf09e
+
+$ npx uuid v5 "www.example.com" DNS
+2ed6657d-e927-568b-95e1-2665a8aea6a2
+```
 
 ### uuidgen (libuud) 
 - https://github.com/util-linux/util-linux/blob/master/misc-utils/uuidgen.c
